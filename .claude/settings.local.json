@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh --version)",
+      "Bash(winget install:*)",
+      "Bash(cmd.exe /c \"winget install --id GitHub.cli -e --silent\")",
+      "Bash(cmd.exe /c \"winget install --id GitHub.cli -e\")",
+      "Bash(cmd.exe /c \"gh --version\")",
+      "Bash(cmd.exe /c 'where gh')",
+      "Bash(cmd.exe /c 'C:/Users/AK/AppData/Local/Microsoft/WinGet/Packages/GitHub.cli_Microsoft.Winget.Source_8wekyb3d8bbwe/gh.exe --version')",
+      "Bash(find /c gh.exe /s)",
+      "Bash(powershell.exe -Command \"Get-Command gh -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source; winget list GitHub.cli 2>&1\")",
+      "Bash(powershell.exe -Command \"git --version; node --version; npm --version\")",
+      "Bash(git init:*)",
+      "Bash(git remote:*)",
+      "Bash(git fetch:*)",
+      "Bash(git reset:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git config:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(curl -s \"https://api.telegram.org/bot8512268158:AAHm5DmoejypFosrSmJNYlX-PnyYzRM_rio/sendMessage\" -X POST -H \"Content-Type: application/json\" -d \"{\"\"chat_id\"\": \"\"891314\"\", \"\"text\"\": \"\"Тест\"\"}\")",
+      "Bash(curl -s \"https://api.telegram.org/bot8512268158:AAHm5DmoejypFosrSmJNYlX-PnyYzRM_rio/sendMessage\" -X POST -H \"Content-Type: application/json\" -d \"{\"\"chat_id\"\": \"\"891314\"\", \"\"text\"\": \"\"Test from azamat.uz\"\"}\")"
+    ]
+  }
+}

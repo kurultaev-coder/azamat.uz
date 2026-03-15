@@ -239,13 +239,6 @@
   <footer>azamat.uz</footer>
 
   <script>
-    // ──────────────────────────────────────────────────
-    //  Telegram Bot настройки
-    //  Как получить: см. инструкцию ниже в чате
-    // ──────────────────────────────────────────────────
-    const BOT_TOKEN = '8512268158:AAHm5DmoejypFosrSmJNYlX-PnyYzRM_rio';
-    const CHAT_ID   = '891314';
-
     document.getElementById('contactForm').addEventListener('submit', async function (e) {
       e.preventDefault();
 
@@ -267,25 +260,12 @@
       btn.textContent = 'Отправляю...';
       status.className = 'form-status';
 
-      const text = [
-        '📩 Новое сообщение с azamat.uz',
-        '',
-        `👤 Имя: ${name}`,
-        `📬 Контакт: ${contact}`,
-        '',
-        `💬 Сообщение:`,
-        message
-      ].join('\n');
-
       try {
-        const res = await fetch(
-          `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: CHAT_ID, text })
-          }
-        );
+        const res = await fetch('/.netlify/functions/send-message', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, contact, message })
+        });
         const data = await res.json();
 
         if (data.ok) {
@@ -293,7 +273,7 @@
           status.textContent = '✓ Сообщение отправлено! Я отвечу вам в ближайшее время.';
           form.reset();
         } else {
-          throw new Error(data.description);
+          throw new Error(data.error);
         }
       } catch (err) {
         status.className = 'form-status error';
