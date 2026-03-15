@@ -296,8 +296,8 @@
 
   // Контакты — ссылки задаём через JS, боты не видят в HTML
   (function () {
-    const u = 'kurultaev', d = 'azamat.uz';
-    document.getElementById('tg-link').href    = 'https://t.me/' + u;
+    const u = 'kurultaev', d = 'azamat.uz', tg = 'azamat_kurultaev';
+    document.getElementById('tg-link').href    = 'https://t.me/' + tg;
     document.getElementById('email-link').href = 'mailto:' + u + '@' + d;
 
     document.getElementById('tg-link').addEventListener('mouseenter',    function () { document.getElementById('tg-img').src    = 'tg-contact-hover.png'; });
