@@ -15,6 +15,30 @@
       min-height: 100vh;
     }
 
+    /* ── Language switcher ── */
+    .lang-switcher {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      display: flex;
+      gap: 4px;
+      z-index: 100;
+    }
+    .lang-btn {
+      background: none;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: #555;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 4px 8px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .lang-btn:hover { color: #aaa; border-color: #555; }
+    .lang-btn.active { color: #6ee7b7; border-color: #6ee7b7; }
+
     /* ── Hero ── */
     .hero {
       position: relative;
@@ -76,6 +100,7 @@
       letter-spacing: 3px;
       text-transform: uppercase;
       animation: bounce 2s infinite;
+      white-space: nowrap;
     }
     @keyframes bounce {
       0%, 100% { transform: translateX(-50%) translateY(0); }
@@ -184,10 +209,17 @@
 </head>
 <body>
 
+  <!-- Language Switcher -->
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="ru">RU</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="uz">UZ</button>
+  </div>
+
   <!-- Hero -->
   <section class="hero">
     <div>
-      <h1 class="name">Азамат<br><span>Курултаев</span></h1>
+      <h1 class="name" id="heroName">Азамат<br><span>Курултаев</span></h1>
       <div class="divider"></div>
       <div class="contacts">
 
@@ -208,27 +240,27 @@
 
       </div>
     </div>
-    <div class="scroll-hint">↓ написать мне</div>
+    <div class="scroll-hint" id="scrollHint">↓ написать мне</div>
   </section>
 
   <!-- Contact Form -->
   <section class="form-section">
     <div class="form-card">
-      <p class="section-label">Обратная связь</p>
-      <h2>Напишите мне</h2>
-      <p class="form-desc">Оставьте сообщение — я отвечу в ближайшее время.</p>
+      <p class="section-label" id="formLabel">Обратная связь</p>
+      <h2 id="formTitle">Напишите мне</h2>
+      <p class="form-desc" id="formDesc">Оставьте сообщение — я отвечу в ближайшее время.</p>
 
       <form id="contactForm" novalidate>
         <div class="form-group">
-          <label for="fname">Ваше имя</label>
+          <label for="fname" id="labelName">Ваше имя</label>
           <input id="fname" type="text" name="name" placeholder="Иван Иванов" required>
         </div>
         <div class="form-group">
-          <label for="fcontact">Контакт для ответа</label>
+          <label for="fcontact" id="labelContact">Контакт для ответа</label>
           <input id="fcontact" type="text" name="contact" placeholder="Telegram, email или телефон" required>
         </div>
         <div class="form-group">
-          <label for="fmessage">Сообщение</label>
+          <label for="fmessage" id="labelMessage">Сообщение</label>
           <textarea id="fmessage" name="message" placeholder="Ваш вопрос или предложение..." required></textarea>
         </div>
         <div class="cf-turnstile" data-sitekey="0x4AAAAAACrQnUKFPyd0n_l8" data-theme="dark" style="margin-bottom: 0.75rem;"></div>
@@ -241,12 +273,124 @@
   <footer>azamat.uz</footer>
 
   <script>
+    // ── Переводы ──────────────────────────────────────────────
+    const i18n = {
+      ru: {
+        lang:             'ru',
+        title:            'Азамат Курултаев',
+        heroName:         'Азамат<br><span>Курултаев</span>',
+        scrollHint:       '↓ написать мне',
+        formLabel:        'Обратная связь',
+        formTitle:        'Напишите мне',
+        formDesc:         'Оставьте сообщение — я отвечу в ближайшее время.',
+        labelName:        'Ваше имя',
+        placeholderName:  'Иван Иванов',
+        labelContact:     'Контакт для ответа',
+        placeholderContact: 'Telegram, email или телефон',
+        labelMessage:     'Сообщение',
+        placeholderMessage: 'Ваш вопрос или предложение...',
+        submitBtn:        'Отправить сообщение',
+        sending:          'Отправляю...',
+        errFields:        'Пожалуйста, заполните все поля.',
+        errCaptcha:       'Пожалуйста, подтвердите, что вы не робот.',
+        errFail:          'Не удалось отправить. Используйте контакты выше.',
+        success:          '✓ Сообщение отправлено! Я отвечу вам в ближайшее время.',
+      },
+      en: {
+        lang:             'en',
+        title:            'Azamat Kurultaev',
+        heroName:         'Azamat<br><span>Kurultaev</span>',
+        scrollHint:       '↓ write to me',
+        formLabel:        'Contact',
+        formTitle:        'Get in touch',
+        formDesc:         'Leave a message — I\'ll get back to you shortly.',
+        labelName:        'Your name',
+        placeholderName:  'John Smith',
+        labelContact:     'How to reach you',
+        placeholderContact: 'Telegram, email or phone',
+        labelMessage:     'Message',
+        placeholderMessage: 'Your question or proposal...',
+        submitBtn:        'Send message',
+        sending:          'Sending...',
+        errFields:        'Please fill in all fields.',
+        errCaptcha:       'Please confirm you\'re not a robot.',
+        errFail:          'Failed to send. Please use the contacts above.',
+        success:          '✓ Message sent! I\'ll get back to you shortly.',
+      },
+      uz: {
+        lang:             'uz',
+        title:            'Azamat Kurultayev',
+        heroName:         'Azamat<br><span>Kurultayev</span>',
+        scrollHint:       '↓ menga yozing',
+        formLabel:        'Aloqa',
+        formTitle:        'Menga yozing',
+        formDesc:         'Xabar qoldiring — tez orada javob beraman.',
+        labelName:        'Ismingiz',
+        placeholderName:  'Jasur Yusupov',
+        labelContact:     'Javob uchun aloqa',
+        placeholderContact: 'Telegram, email yoki telefon',
+        labelMessage:     'Xabar',
+        placeholderMessage: 'Savolingiz yoki taklifingiz...',
+        submitBtn:        'Xabar yuborish',
+        sending:          'Yuborilmoqda...',
+        errFields:        'Iltimos, barcha maydonlarni to\'ldiring.',
+        errCaptcha:       'Iltimos, siz robot emasligingizni tasdiqlang.',
+        errFail:          'Yuborib bo\'lmadi. Yuqoridagi kontaktlardan foydalaning.',
+        success:          '✓ Xabar yuborildi! Tez orada javob beraman.',
+      },
+    };
+
+    // ── Применить язык ────────────────────────────────────────
+    function applyLang(code) {
+      const t = i18n[code];
+      if (!t) return;
+
+      document.documentElement.lang           = t.lang;
+      document.title                          = t.title;
+      document.getElementById('heroName').innerHTML      = t.heroName;
+      document.getElementById('scrollHint').textContent  = t.scrollHint;
+      document.getElementById('formLabel').textContent   = t.formLabel;
+      document.getElementById('formTitle').textContent   = t.formTitle;
+      document.getElementById('formDesc').textContent    = t.formDesc;
+      document.getElementById('labelName').textContent   = t.labelName;
+      document.getElementById('fname').placeholder       = t.placeholderName;
+      document.getElementById('labelContact').textContent  = t.labelContact;
+      document.getElementById('fcontact').placeholder     = t.placeholderContact;
+      document.getElementById('labelMessage').textContent  = t.labelMessage;
+      document.getElementById('fmessage').placeholder     = t.placeholderMessage;
+
+      const btn = document.getElementById('submitBtn');
+      if (!btn.disabled) btn.textContent = t.submitBtn;
+
+      document.querySelectorAll('.lang-btn').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.lang === code);
+      });
+
+      localStorage.setItem('lang', code);
+      window._currentLang = code;
+    }
+
+    // ── Переключатель ─────────────────────────────────────────
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        applyLang(btn.dataset.lang);
+      });
+    });
+
+    // ── Инициализация языка ───────────────────────────────────
+    (function () {
+      const saved = localStorage.getItem('lang');
+      applyLang(i18n[saved] ? saved : 'ru');
+    })();
+
+    // ── Форма ─────────────────────────────────────────────────
     document.getElementById('contactForm').addEventListener('submit', async function (e) {
       e.preventDefault();
 
       const btn    = document.getElementById('submitBtn');
       const status = document.getElementById('formStatus');
       const form   = e.target;
+      const t      = i18n[window._currentLang] || i18n.ru;
 
       const name    = form.name.value.trim();
       const contact = form.contact.value.trim();
@@ -255,18 +399,18 @@
 
       if (!name || !contact || !message) {
         status.className = 'form-status error';
-        status.textContent = 'Пожалуйста, заполните все поля.';
+        status.textContent = t.errFields;
         return;
       }
 
       if (!token) {
         status.className = 'form-status error';
-        status.textContent = 'Пожалуйста, подтвердите, что вы не робот.';
+        status.textContent = t.errCaptcha;
         return;
       }
 
       btn.disabled = true;
-      btn.textContent = 'Отправляю...';
+      btn.textContent = t.sending;
       status.className = 'form-status';
 
       try {
@@ -279,7 +423,7 @@
 
         if (data.ok) {
           status.className = 'form-status success';
-          status.textContent = '✓ Сообщение отправлено! Я отвечу вам в ближайшее время.';
+          status.textContent = t.success;
           form.reset();
           if (window.turnstile) turnstile.reset();
         } else {
@@ -287,24 +431,24 @@
         }
       } catch (err) {
         status.className = 'form-status error';
-        status.textContent = 'Не удалось отправить. Используйте контакты выше.';
+        status.textContent = t.errFail;
       }
 
       btn.disabled = false;
-      btn.textContent = 'Отправить сообщение';
+      btn.textContent = t.submitBtn;
     });
 
-  // Контакты — ссылки задаём через JS, боты не видят в HTML
-  (function () {
-    const u = 'kurultaev', d = 'azamat.uz', tg = 'azamat_kurultaev';
-    document.getElementById('tg-link').href    = 'https://t.me/' + tg;
-    document.getElementById('email-link').href = 'mailto:' + u + '@' + d;
+    // ── Контакты (защита от ботов) ────────────────────────────
+    (function () {
+      const u = 'kurultaev', d = 'azamat.uz', tg = 'azamat_kurultaev';
+      document.getElementById('tg-link').href    = 'https://t.me/' + tg;
+      document.getElementById('email-link').href = 'mailto:' + u + '@' + d;
 
-    document.getElementById('tg-link').addEventListener('mouseenter',    function () { document.getElementById('tg-img').src    = 'tg-contact-hover.png'; });
-    document.getElementById('tg-link').addEventListener('mouseleave',    function () { document.getElementById('tg-img').src    = 'tg-contact.png'; });
-    document.getElementById('email-link').addEventListener('mouseenter', function () { document.getElementById('email-img').src = 'email-contact-hover.png'; });
-    document.getElementById('email-link').addEventListener('mouseleave', function () { document.getElementById('email-img').src = 'email-contact.png'; });
-  })();
+      document.getElementById('tg-link').addEventListener('mouseenter',    function () { document.getElementById('tg-img').src    = 'tg-contact-hover.png'; });
+      document.getElementById('tg-link').addEventListener('mouseleave',    function () { document.getElementById('tg-img').src    = 'tg-contact.png'; });
+      document.getElementById('email-link').addEventListener('mouseenter', function () { document.getElementById('email-img').src = 'email-contact-hover.png'; });
+      document.getElementById('email-link').addEventListener('mouseleave', function () { document.getElementById('email-img').src = 'email-contact.png'; });
+    })();
   </script>
 
 </body>
