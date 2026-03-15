@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uz">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Азамат Курултаев</title>
+  <title>Azamat Kurultayev</title>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -211,15 +211,15 @@
 
   <!-- Language Switcher -->
   <div class="lang-switcher">
-    <button class="lang-btn active" data-lang="ru">RU</button>
+    <button class="lang-btn active" data-lang="uz">UZ</button>
+    <button class="lang-btn" data-lang="ru">RU</button>
     <button class="lang-btn" data-lang="en">EN</button>
-    <button class="lang-btn" data-lang="uz">UZ</button>
   </div>
 
   <!-- Hero -->
   <section class="hero">
     <div>
-      <h1 class="name" id="heroName">Азамат<br><span>Курултаев</span></h1>
+      <h1 class="name" id="heroName">Azamat<br><span>Kurultayev</span></h1>
       <div class="divider"></div>
       <div class="contacts">
 
@@ -240,31 +240,31 @@
 
       </div>
     </div>
-    <div class="scroll-hint" id="scrollHint">↓ написать мне</div>
+    <div class="scroll-hint" id="scrollHint">↓ menga yozing</div>
   </section>
 
   <!-- Contact Form -->
   <section class="form-section">
     <div class="form-card">
-      <p class="section-label" id="formLabel">Обратная связь</p>
-      <h2 id="formTitle">Напишите мне</h2>
-      <p class="form-desc" id="formDesc">Оставьте сообщение — я отвечу в ближайшее время.</p>
+      <p class="section-label" id="formLabel">Aloqa</p>
+      <h2 id="formTitle">Menga yozing</h2>
+      <p class="form-desc" id="formDesc">Xabar qoldiring — tez orada javob beraman.</p>
 
       <form id="contactForm" novalidate>
         <div class="form-group">
-          <label for="fname" id="labelName">Ваше имя</label>
-          <input id="fname" type="text" name="name" placeholder="Иван Иванов" required>
+          <label for="fname" id="labelName">Ismingiz</label>
+          <input id="fname" type="text" name="name" placeholder="Jasur Yusupov" required>
         </div>
         <div class="form-group">
-          <label for="fcontact" id="labelContact">Контакт для ответа</label>
-          <input id="fcontact" type="text" name="contact" placeholder="Telegram, email или телефон" required>
+          <label for="fcontact" id="labelContact">Javob uchun aloqa</label>
+          <input id="fcontact" type="text" name="contact" placeholder="Telegram, email yoki telefon" required>
         </div>
         <div class="form-group">
-          <label for="fmessage" id="labelMessage">Сообщение</label>
-          <textarea id="fmessage" name="message" placeholder="Ваш вопрос или предложение..." required></textarea>
+          <label for="fmessage" id="labelMessage">Xabar</label>
+          <textarea id="fmessage" name="message" placeholder="Savolingiz yoki taklifingiz..." required></textarea>
         </div>
         <div class="cf-turnstile" data-sitekey="0x4AAAAAACrQnUKFPyd0n_l8" data-theme="dark" style="margin-bottom: 0.75rem;"></div>
-        <button type="submit" class="submit-btn" id="submitBtn">Отправить сообщение</button>
+        <button type="submit" class="submit-btn" id="submitBtn">Xabar yuborish</button>
         <div class="form-status" id="formStatus"></div>
       </form>
     </div>
@@ -380,7 +380,7 @@
     // ── Инициализация языка ───────────────────────────────────
     (function () {
       const saved = localStorage.getItem('lang');
-      applyLang(i18n[saved] ? saved : 'ru');
+      applyLang(i18n[saved] ? saved : 'uz');
     })();
 
     // ── Форма ─────────────────────────────────────────────────
