@@ -88,6 +88,13 @@
       margin: 0 auto;
     }
 
+    .form-card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
+      padding: 2.5rem;
+    }
+
     .section-label {
       font-size: 0.7rem;
       letter-spacing: 4px;
@@ -103,8 +110,8 @@
     }
 
     .form-desc {
-      color: #555;
-      margin-bottom: 2.5rem;
+      color: #777;
+      margin-bottom: 2rem;
       font-size: 0.95rem;
     }
 
@@ -115,14 +122,14 @@
       font-size: 0.72rem;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: #555;
+      color: #888;
       margin-bottom: 0.5rem;
     }
 
     input, textarea {
       width: 100%;
-      background: #161616;
-      border: 1px solid #222;
+      background: #242424;
+      border: 1px solid #333;
       border-radius: 10px;
       padding: 0.9rem 1rem;
       color: #fff;
@@ -131,7 +138,7 @@
       transition: border-color 0.2s;
       outline: none;
     }
-    input::placeholder, textarea::placeholder { color: #3a3a3a; }
+    input::placeholder, textarea::placeholder { color: #555; }
     input:focus, textarea:focus { border-color: #6ee7b7; }
 
     textarea { height: 140px; resize: vertical; }
@@ -205,26 +212,28 @@
 
   <!-- Contact Form -->
   <section class="form-section">
-    <p class="section-label">Обратная связь</p>
-    <h2>Напишите мне</h2>
-    <p class="form-desc">Оставьте сообщение — я отвечу в ближайшее время.</p>
+    <div class="form-card">
+      <p class="section-label">Обратная связь</p>
+      <h2>Напишите мне</h2>
+      <p class="form-desc">Оставьте сообщение — я отвечу в ближайшее время.</p>
 
-    <form id="contactForm" novalidate>
-      <div class="form-group">
-        <label for="fname">Ваше имя</label>
-        <input id="fname" type="text" name="name" placeholder="Иван Иванов" required>
-      </div>
-      <div class="form-group">
-        <label for="fcontact">Контакт для ответа</label>
-        <input id="fcontact" type="text" name="contact" placeholder="Telegram, email или телефон" required>
-      </div>
-      <div class="form-group">
-        <label for="fmessage">Сообщение</label>
-        <textarea id="fmessage" name="message" placeholder="Ваш вопрос или предложение..." required></textarea>
-      </div>
-      <button type="submit" class="submit-btn" id="submitBtn">Отправить сообщение</button>
-      <div class="form-status" id="formStatus"></div>
-    </form>
+      <form id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="fname">Ваше имя</label>
+          <input id="fname" type="text" name="name" placeholder="Иван Иванов" required>
+        </div>
+        <div class="form-group">
+          <label for="fcontact">Контакт для ответа</label>
+          <input id="fcontact" type="text" name="contact" placeholder="Telegram, email или телефон" required>
+        </div>
+        <div class="form-group">
+          <label for="fmessage">Сообщение</label>
+          <textarea id="fmessage" name="message" placeholder="Ваш вопрос или предложение..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">Отправить сообщение</button>
+        <div class="form-status" id="formStatus"></div>
+      </form>
+    </div>
   </section>
 
   <footer>azamat.uz</footer>
