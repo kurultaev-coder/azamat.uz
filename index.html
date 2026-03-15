@@ -278,7 +278,7 @@
 
   <footer>
     azamat.uz
-    <div class="visit-counter">&#128065; <span id="visitCount">…</span></div>
+    <div class="visit-counter"><canvas id="visitCanvas" height="14"></canvas></div>
   </footer>
 
   <script>
@@ -452,8 +452,19 @@
       fetch('https://api.counterapi.dev/v1/azamat-uz/visits/up')
         .then(function (r) { return r.json(); })
         .then(function (d) {
-          var el = document.getElementById('visitCount');
-          if (el && d.count) el.textContent = Number(d.count).toLocaleString();
+          if (!d.count) return;
+          var canvas = document.getElementById('visitCanvas');
+          if (!canvas) return;
+          var text = Number(d.count).toLocaleString();
+          var font = '11px "Segoe UI Variable Text","Segoe UI",sans-serif';
+          var ctx = canvas.getContext('2d');
+          ctx.font = font;
+          var w = Math.ceil(ctx.measureText(text).width) + 2;
+          canvas.width = w;
+          ctx.font = font;
+          ctx.fillStyle = '#383838';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(text, 1, 7);
         })
         .catch(function () {});
     })();
