@@ -205,6 +205,12 @@
       color: #2a2a2a;
       font-size: 0.8rem;
     }
+    .visit-counter {
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      color: #222;
+      letter-spacing: 1px;
+    }
   </style>
 </head>
 <body>
@@ -270,7 +276,10 @@
     </div>
   </section>
 
-  <footer>azamat.uz</footer>
+  <footer>
+    azamat.uz
+    <div class="visit-counter">&#128065; <span id="visitCount">…</span></div>
+  </footer>
 
   <script>
     // ── Переводы ──────────────────────────────────────────────
@@ -437,6 +446,17 @@
       btn.disabled = false;
       btn.textContent = t.submitBtn;
     });
+
+    // ── Счётчик посещений ─────────────────────────────────────
+    (function () {
+      fetch('https://api.counterapi.dev/v1/azamat-uz/visits/up')
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          var el = document.getElementById('visitCount');
+          if (el && d.count) el.textContent = Number(d.count).toLocaleString();
+        })
+        .catch(function () {});
+    })();
 
     // ── Контакты (защита от ботов) ────────────────────────────
     (function () {
